@@ -19,7 +19,8 @@ class HookForm(forms.ModelForm):
 
     class Meta:
         model = HookModel
-        fields = ['user', 'target', 'event']
+        fields = [f for f in model._meta.get_fields()
+                  if f in ['user', 'target', 'event']]
 
     def __init__(self, *args, **kwargs):
         super(HookForm, self).__init__(*args, **kwargs)
